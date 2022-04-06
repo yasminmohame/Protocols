@@ -103,11 +103,12 @@ public class MainActivity extends AppCompatActivity {
                                 tvMessages.append("server: " + message + "\n");
                             }
                         });
-                    }else {
-                        Thread1 = new Thread(new Thread1());
-                        Thread1.start();
-                        return;
                     }
+//                    else {
+//                        Thread1 = new Thread(new Thread1());
+//                        Thread1.start();
+//                        return;
+//                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            output.write(message);
+            output.write(message + "\n");
             output.flush();
             runOnUiThread(new Runnable() {
                 @Override
@@ -135,78 +136,9 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        private void runOnUiThread(Runnable runnable) {
-        }
+
 
 
     }
 }
 
-//import android.widget.EditText;
-//
-//import androidx.appcompat.app.AppCompatActivity;
-//import android.annotation.SuppressLint;
-//import android.os.Bundle;
-//import android.os.StrictMode;
-////import android.support.v11.app.AppCompatActivity;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.TextView;
-//import java.io.BufferedReader;
-//import java.io.DataOutputStream;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-//import java.io.PrintWriter;
-//import java.net.Socket;
-//
-//
-//public class MainActivity extends AppCompatActivity {
-//
-//
-//    EditText edTxt;
-//    myThread myThread ;
-//   // Button btnSend;
-//   //String SERVER_IP = "192.168.1.6";
-//   //int SERVER_PORT = 5555;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
-//        myThread = new myThread();
-//        new Thread(myThread).start();
-//        edTxt = findViewById(R.id.etMessage);
-//    }
-//
-//    private class myThread implements Runnable {
-//        private volatile String msg = "" ;
-//        Socket socket ;
-//        DataOutputStream dos ;
-//        @Override
-//
-//        public void run() {
-//            try {
-//                socket = new Socket(" 192.168.1.6", 5677);
-//                dos = new DataOutputStream(socket.getOutputStream());
-//                dos.writeUTF(msg);
-//                dos.close();
-//                dos.flush();
-//                socket.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        public void sendMsgParam(String msg){
-//            this.msg = msg ;
-//            run();
-//        }
-//
-//    }
-//    public void btnClickSnd (View v){
-//       String msg = edTxt.getText().toString();
-//       myThread.sendMsgParam(msg);
-//    }
-//}
